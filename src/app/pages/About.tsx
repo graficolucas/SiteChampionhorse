@@ -1,8 +1,7 @@
 import { motion } from "motion/react";
-import bannerAbout from "figma:asset/1629d1ad709b65d19a5288947d13c5d58a591f11.png";
-import fabricRolls from "figma:asset/84cbe3d67cfc568a50e98354e485357b060dbcc1.png";
-import tapeMeasure from "figma:asset/24811128012c90b063db458185a6ebebe4d6b505.png";
-
+const bannerAbout = "/images/1629d1ad709b65d19a5288947d13c5d58a591f11.png";
+const fabricRolls = "/images/84cbe3d67cfc568a50e98354e485357b060dbcc1.png";
+const tapeMeasure = "/images/24811128012c90b063db458185a6ebebe4d6b505.png";
 export function About() {
   return (
     <div className="min-h-screen bg-white pt-20">

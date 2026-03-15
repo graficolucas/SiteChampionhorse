@@ -1,7 +1,7 @@
 import { ProductCard } from "../components/ProductCard";
 import { products } from "../data/products";
 import { motion } from "motion/react";
-import banner from "figma:asset/4f19d597a4d0a5b20b23e09d14966920a2a7b153.png";
+const banner = "/images/4f19d597a4d0a5b20b23e09d14966920a2a7b153.png";
 
 export function Home() {
   return (

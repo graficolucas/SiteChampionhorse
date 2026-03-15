@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Mail, Instagram, MapPin, Phone } from "lucide-react";
-import contactBanner from "figma:asset/5e6b0147ee6a125da23b65bcb4cdae09d5e16a4d.png";
-import horsePhoto from "figma:asset/d78e6b84dc4b8f12dcd6fc10e7fb3c0a10e34fa5.png";
+const contactBanner = "/images/5e6b0147ee6a125da23b65bcb4cdae09d5e16a4d.png";
+const horsePhoto = "/images/d78e6b84dc4b8f12dcd6fc10e7fb3c0a10e34fa5.png";
 
 export function Contact() {
   return (

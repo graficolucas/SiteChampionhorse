@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ShoppingBag } from "lucide-react";
-import logo from "figma:asset/19348a14bf021d934e45f132a5882c151f5efed0.png";
+const logo = "/images/19348a14bf021d934e45f132a5882c151f5efed0.png";
 
 export function Header() {
   return (
