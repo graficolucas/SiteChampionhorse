@@ -4,21 +4,50 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 /**
- * Resolves `figma:asset/HASH.png` virtual imports to `/images/HASH.png`.
- * Place all asset PNG/JPG files in /public/images/ before building.
+ * Standalone fallback plugin for `figma:asset/HASH.png` imports.
+ *
+ * - Inside Figma Make: Figma's own plugin (enforce:'pre') resolves these first,
+ *   so this plugin is never called.
+ * - In a standalone Vite build (GitHub CI / Vercel): this plugin resolves every
+ *   `figma:asset/HASH.png` import to the string `/images/HASH.png`, which maps
+ *   to the file at `public/images/HASH.png`.
+ *
+ * Run `npm run export-assets` once inside Figma Make to populate public/images/.
  */
-function figmaAssetPlugin(): Plugin {
+function figmaAssetFallbackPlugin(): Plugin {
   return {
-    name: 'figma-asset-resolver',
+    name: 'figma-asset-fallback',
+    // enforce:'post' so Figma Make's pre-plugin always wins when present
+    enforce: 'post',
     resolveId(id: string) {
       if (id.startsWith('figma:asset/')) {
-        return '\0' + id
+        return '\0figma-asset:' + id.slice('figma:asset/'.length)
       }
     },
     load(id: string) {
-      if (id.startsWith('\0figma:asset/')) {
-        const filename = id.replace('\0figma:asset/', '')
+      if (id.startsWith('\0figma-asset:')) {
+        const filename = id.slice('\0figma-asset:'.length)
         return `export default "/images/${filename}"`
+      }
+    },
+  }
+}
+
+/**
+ * Stub for `figma:foundry-client-api` so standalone builds don't crash.
+ */
+function figmaFoundryStubPlugin(): Plugin {
+  return {
+    name: 'figma-foundry-stub',
+    enforce: 'post',
+    resolveId(id: string) {
+      if (id === 'figma:foundry-client-api') {
+        return '\0figma-foundry-stub'
+      }
+    },
+    load(id: string) {
+      if (id === '\0figma-foundry-stub') {
+        return `export default {}`
       }
     },
   }
@@ -26,7 +55,8 @@ function figmaAssetPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [
-    figmaAssetPlugin(),
+    figmaFoundryStubPlugin(),
+    figmaAssetFallbackPlugin(),
     react(),
     tailwindcss(),
   ],

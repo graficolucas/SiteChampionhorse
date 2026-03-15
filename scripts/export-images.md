@@ -1,15 +1,60 @@
-# Como exportar as imagens para produção
+# Champion Horse — Deployment Guide
 
-Antes de fazer o deploy no Vercel, você precisa colocar todas as imagens na pasta `/public/images/`.
+## How images work
 
-## Lista de imagens necessárias
+Images are imported in the source code using Figma Make's virtual module scheme:
 
-Copie cada arquivo PNG para `/public/images/` mantendo o nome original:
+```ts
+import logo from "figma:asset/19348a14bf021d934e45f132a5882c151f5efed0.png"
+```
 
-| Arquivo | Uso |
+- **Inside Figma Make**: resolved automatically by Figma's Vite plugin.
+- **Standalone build (GitHub / Vercel)**: `vite.config.ts` contains a fallback
+  plugin (`figmaAssetFallbackPlugin`) that maps every `figma:asset/HASH.png`
+  import to the string `/images/HASH.png`, served from `public/images/`.
+
+---
+
+## Step-by-step deployment
+
+### 1 — Export images (run once, inside Figma Make)
+
+```bash
+npm run export-assets
+```
+
+This starts a temporary Vite dev server, resolves every `figma:asset` module,
+and writes the binary PNG files to `/public/images/`.
+
+### 2 — Commit everything to GitHub
+
+```bash
+git add public/images
+git commit -m "chore: export production images"
+git push
+```
+
+### 3 — Deploy on Vercel
+
+Connect your GitHub repo to Vercel.  
+`vercel.json` is already configured:
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| SPA rewrites | `/* → /index.html` |
+
+No additional environment variables are needed.
+
+---
+
+## Asset manifest
+
+| File | Used in |
 |---|---|
 | `19348a14bf021d934e45f132a5882c151f5efed0.png` | Logo (Header) |
-| `4f19d597a4d0a5b20b23e09d14966920a2a7b153.png` | Banner Home |
+| `4f19d597a4d0a5b20b23e09d14966920a2a7b153.png` | Hero banner (Home) |
 | `7a46e079894e3f86c5e604b2a9fffb01c8ebd53e.png` | Camiseta White |
 | `58b974939afa5b74ac27a1da164104038919e2f0.png` | Camiseta Black |
 | `f0a0a98243ed2a795333b9c165c987466dfd4f81.png` | Camiseta Orange |
@@ -21,25 +66,11 @@ Copie cada arquivo PNG para `/public/images/` mantendo o nome original:
 | `ac103307e734728ae62d3b6176274b677ea78a41.png` | Trucker Hat Black |
 | `62bf08dc43a22f51962c98442f1dd66ee73f3c38.png` | Trucker Hat Red |
 | `42254b26764fbbed259b6f0bbbdf21e4df3803c6.png` | Trucker Hat Green |
-| `78eb323cf7c7f11155fc888cb432c6cdc367af60.png` | Trucker Hat (modelo) |
-| `dc12551952ce2e003251c978ba0611a9c3c345c7.png` | Moletom CH (costas) |
-| `230974ec7d03e7c2bb5800583765a3d3bc0b7b69.png` | Moletom CH (frente) |
-| `1629d1ad709b65d19a5288947d13c5d58a591f11.png` | Banner Sobre |
-| `84cbe3d67cfc568a50e98354e485357b060dbcc1.png` | Grid Sobre (esquerda) |
-| `24811128012c90b063db458185a6ebebe4d6b505.png` | Grid Sobre (direita) |
-| `5e6b0147ee6a125da23b65bcb4cdae09d5e16a4d.png` | Banner Contato |
-| `d78e6b84dc4b8f12dcd6fc10e7fb3c0a10e34fa5.png` | Foto grid Contato |
-
-## Como obter os arquivos
-
-No Figma Make, exporte cada imagem pelo painel de assets ou faça download direto via browser (F12 > Network > filtrar por `.png`).
-
-## Deploy
-
-```bash
-npm install
-npm run build   # gera a pasta dist/
-# faça upload da pasta dist/ no Vercel, ou conecte o repositório GitHub
-```
-
-O `vercel.json` já está configurado para suportar React Router (SPA routing).
+| `78eb323cf7c7f11155fc888cb432c6cdc367af60.png` | Trucker Hat (model) |
+| `dc12551952ce2e003251c978ba0611a9c3c345c7.png` | Moletom CH (back) |
+| `230974ec7d03e7c2bb5800583765a3d3bc0b7b69.png` | Moletom CH (front) |
+| `1629d1ad709b65d19a5288947d13c5d58a591f11.png` | About banner |
+| `84cbe3d67cfc568a50e98354e485357b060dbcc1.png` | About grid left |
+| `24811128012c90b063db458185a6ebebe4d6b505.png` | About grid right |
+| `5e6b0147ee6a125da23b65bcb4cdae09d5e16a4d.png` | Contact banner |
+| `d78e6b84dc4b8f12dcd6fc10e7fb3c0a10e34fa5.png` | Contact grid |
