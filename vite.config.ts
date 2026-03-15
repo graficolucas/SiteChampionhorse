@@ -1,22 +1,39 @@
-import { defineConfig } from 'vite'
+import { defineConfig, Plugin } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+/**
+ * Resolves `figma:asset/HASH.png` virtual imports to `/images/HASH.png`.
+ * Place all asset PNG/JPG files in /public/images/ before building.
+ */
+function figmaAssetPlugin(): Plugin {
+  return {
+    name: 'figma-asset-resolver',
+    resolveId(id: string) {
+      if (id.startsWith('figma:asset/')) {
+        return '\0' + id
+      }
+    },
+    load(id: string) {
+      if (id.startsWith('\0figma:asset/')) {
+        const filename = id.replace('\0figma:asset/', '')
+        return `export default "/images/${filename}"`
+      }
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
+    figmaAssetPlugin(),
     react(),
     tailwindcss(),
   ],
   resolve: {
     alias: {
-      // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
     },
   },
-
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })

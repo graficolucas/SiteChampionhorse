@@ -37,7 +37,7 @@ Preço: R$ ${product.price.toFixed(2).replace(".", ",")}
 
 Aguardo retorno para finalizar o pedido!`;
 
-    const whatsappNumber = "5511999999999"; // Substitua pelo seu número
+    const whatsappNumber = "5541995027032"; // Substitua pelo seu número
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
