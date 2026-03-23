@@ -12,6 +12,9 @@ const mysteryTee = "/images/e579d7010e0b6697b2e9f88d3257a9c2515195d3.png";
 const notTodayTee = "/images/a67dc446fe898a2c22b4d04550f55129a7ecd1fa.png";
 const hoodieBlue = "/images/2102ab3046489c9007eab7dc7e59c7a63c5f1acb.png";
 const motorTee = "/images/ac4d74acb8666f8ca78ebc75ac090ef8552e5fd6.png";
+const cowboy = "/images/cowboy.png";
+const rider = "/images/rider.png";
+
 
 export interface Product {
   id: string;
@@ -102,5 +105,23 @@ export const products: Product[] = [
     description: "Moletom premium em algodão com capuz e bolso canguru. Estampas exclusivas Champion Horse na frente e nas costas. Conforto e estilo para os dias mais frios.",
     images: [hoodieGrayFront, hoodieGrayBack],
     sizes: ["P", "M", "G", "GG"],
+  },
+
+  {
+    id: "trucker-hat-rider",
+    name: "Trucker Hat Rider",
+    price: 129.90,
+    description: "Boné estilo trucker com tela respirável, estampa Champion Horse e ajuste traseiro. Disponível em múltiplas cores. O acessório perfeito para completar seu look.",
+    images: [rider,],
+    sizes: ["Ajustável"],
+  },
+
+  {
+    id: "trucker-hat-cowboy",
+    name: "Trucker Hat Cowboy",
+    price: 129.90,
+    description: "Boné estilo trucker com tela respirável, estampa Champion Horse e ajuste traseiro. Disponível em múltiplas cores. O acessório perfeito para completar seu look.",
+    images: [cowboy,],
+    sizes: ["Ajustável"],
   },
 ];
