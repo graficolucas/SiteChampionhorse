@@ -14,7 +14,11 @@ const hoodieBlue = "/images/2102ab3046489c9007eab7dc7e59c7a63c5f1acb.png";
 const motorTee = "/images/ac4d74acb8666f8ca78ebc75ac090ef8552e5fd6.png";
 const cowboy = "/images/cowboy.png";
 const rider = "/images/rider.png";
-
+const riderTeeBlack = "/images/rider b.png";
+const cowboyTeeBlack = "/images/cowboy tb.png";
+const riderTeeWhite = "/images/rider tw.png";
+const chTeeWhite = "/images/ch.png";
+const cowboyTeeWhite = "/images/cowboy w.png";
 
 export interface Product {
   id: string;
@@ -26,12 +30,60 @@ export interface Product {
 }
 
 export const products: Product[] = [
+
+  {
+    id: "moletom-ch",
+    name: "Moletom CH",
+    price: 269.90,
+    description: "Moletom premium em algodão com capuz e bolso canguru. Estampas exclusivas Champion Horse na frente e nas costas. Conforto e estilo para os dias mais frios.",
+    images: [hoodieGrayFront, hoodieGrayBack],
+    sizes: ["P", "M", "G", "GG"],
+  },
+  
+ {
+    id: "camiseta-champion-horse-white-ch",
+    name: "Camiseta CH White",
+    price: 139.90,
+    description: "Camiseta premium em algodão com estampa exclusiva Champion Horse. Corte clássico e acabamento de alta qualidade.",
+    images: [chTeeWhite],
+    sizes: ["P", "M", "G", "GG"],
+  },
+
+
+  {
+    id: "camiseta-champion-horse-black-rider",
+    name: "Camiseta Rider Black",
+    price: 139.90,
+    description: "Camiseta premium em algodão com estampa exclusiva Champion Horse. Corte clássico e acabamento de alta qualidade.",
+    images: [riderTeeBlack,],
+    sizes: ["P", "M", "G", "GG"],
+  },
+
+  
+{
+    id: "camiseta-champion-horse-white-cowboy",
+    name: "Camiseta Cowboy White",
+    price: 139.90,
+    description: "Camiseta premium em algodão com estampa exclusiva Champion Horse. Corte clássico e acabamento de alta qualidade.",
+    images: [cowboyTeeWhite],
+    sizes: ["P", "M", "G", "GG"],
+  },
+
+  {
+    id: "camiseta-champion-horse-white-cowboy",
+    name: "Camiseta Cowboy White",
+    price: 139.90,
+    description: "Camiseta premium em algodão com estampa exclusiva Champion Horse. Corte clássico e acabamento de alta qualidade.",
+    images: [cowboyTeeBlack],
+    sizes: ["P", "M", "G", "GG"],
+  },
+
   {
     id: "camiseta-champion-horse-white",
     name: "Camiseta Champion Horse White",
     price: 139.90,
     description: "Camiseta premium em algodão com estampa exclusiva Champion Horse. Corte clássico e acabamento de alta qualidade.",
-    images: [whiteTee],
+    images: [riderTeeWhite],
     sizes: ["P", "M", "G", "GG"],
   },
   {
@@ -66,14 +118,7 @@ export const products: Product[] = [
     images: [notTodayTee],
     sizes: ["P", "M", "G", "GG"],
   },
-  {
-    id: "moletom-azul-ch",
-    name: "Moletom Azul CH",
-    price: 239.90,
-    description: "Moletom azul royal com estampa exclusiva do cavaleiro esqueleto Champion Horse. Tecido pesado premium, gola careca e tag CH bordada na gola.",
-    images: [hoodieBlue],
-    sizes: ["P", "M", "G", "GG"],
-  },
+  
   {
     id: "motor-championhorse-tee",
     name: "Motor Championhorse Tee",
@@ -98,15 +143,7 @@ export const products: Product[] = [
     images: [truckerBlack, truckerRed, truckerGreen, truckerModel],
     sizes: ["Ajustável"],
   },
-  {
-    id: "moletom-ch",
-    name: "Moletom CH",
-    price: 269.90,
-    description: "Moletom premium em algodão com capuz e bolso canguru. Estampas exclusivas Champion Horse na frente e nas costas. Conforto e estilo para os dias mais frios.",
-    images: [hoodieGrayFront, hoodieGrayBack],
-    sizes: ["P", "M", "G", "GG"],
-  },
-
+  
   {
     id: "trucker-hat-rider",
     name: "Trucker Hat Rider",
