@@ -120,14 +120,6 @@ export const products: Product[] = [
   },
   
   {
-    id: "motor-championhorse-tee",
-    name: "Motor Championhorse Tee",
-    price: 139.90,
-    description: "Camiseta branca com estampa Motor Championhorse Cycles inspirada no universo das motocicletas. Algodão premium com corte oversized.",
-    images: [motorTee],
-    sizes: ["P", "M", "G", "GG"],
-  },
-  {
     id: "ecobag-not-today",
     name: "Ecobag Not Today",
     price: 79.90,
